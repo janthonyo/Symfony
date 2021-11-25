@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    {#
+        Trasteando con la base
+    #}
+    {{ parent() }}
+
+
+    {# Comentario:
+
+        Para obtener los parámetros del controlador, se usa doble llave
+        y el nombre del parámetro que manda el controlador.
+    #}
+    Y esto seria otra página que recibe el parámetro: {{datos}}
+
+
+    {# Comentario:
+
+        {% %}: Se usa para escribir codigo twig y llamar a variables, 
+               funciones, hacer ciclos, condicionales...
+    #}
+    {% set miVariable = "Ejemplo de variable en Twig." %}
+    <br><br>{{miVariable}}
+
+
+    {#
+        Condicionales en Twig
+    #}
+    {% if num1 < num2 %}
+        <br><br>Numero 1 mayor que número 2.
+    {% else %}
+        <br><br>Otra cosa.
+    {% endif %}
+
+
+    {#
+        Bucle for y filtros
+    #}
+    {% set myArray = nombres | split(',')%}
+    <br>
+
+    {% for nombre in myArray %}
+        <br>* {{nombre}}
+    {% endfor %}
+
+
+    <br><br>
+    <a href={{ path("index") }}>Volver</a>
+
+{% endblock %}
+
+{% block javascripts %}{{ parent() }}{% endblock %}
