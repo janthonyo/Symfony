@@ -1,7 +1,29 @@
 {{ dump(find) }}
+{#<hr>#}
+{#{ dump(findOneBy) }#}
+{#<hr>#}
+{#{ dump(findBy) }#}
+{#<hr>#}
+{#{ dump(findAll) }#}
+
 <hr>
-{{ dump(findOneBy) }}
+Datos find(): <br><br>
+{{find.id}} - {{find.name}} - {{find.lastname}} - {{find.age}}
+
 <hr>
-{{ dump(findBy) }}
+Datos findOneBy(): <br><br>
+{{findOneBy.id}} - {{findOneBy.name}} - {{findOneBy.lastname}} - {{findOneBy.age}}
+
 <hr>
-{{ dump(findAll) }}
+Datos findBy(): <br><br>
+
+{% for user in findBy %}
+    {{user.id}} - {{user.name}} - {{user.lastname}} - {{user.age}}
+{% endfor %}
+
+<hr>
+Datos findAll(): <br><br>
+
+{% for user in findAll %}
+    {{user.id}} - {{user.name}} - {{user.lastname}} - {{user.age}}<br>
+{% endfor %}
