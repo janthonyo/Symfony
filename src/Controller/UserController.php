@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\User;
+use App\Entity\Category;
 use Doctrine\ORM\EntityManagerInterface;
 
 class UserController extends AbstractController
@@ -28,7 +29,9 @@ class UserController extends AbstractController
 
         $entityManager = $this->getDoctrine()->getManager();
 
-        $user = new User("Hugo", "Selatrop", 13, "wakfu@outlook.es");
+        $category = new Category("administrador");
+        $user = new User("Angel", "Bixde", 22, "asantos@invented.es");
+        $user->setCategory($category);
 
         # $user = new User();
         # $user->setName("Francisco");
@@ -41,5 +44,27 @@ class UserController extends AbstractController
         $entityManager->flush();
 
         return new Response('Saved new product with id '.$user->getId());
+    }
+
+    /**
+     * @Route("/user/find/", name="find")
+     */
+    public function buscarUser(){
+
+        # Busquedas en la base de datos
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository(User::class)->find(1);
+        $userOneBy = $em->getRepository(User::class)->findOneBy(['name'=>"Hugo", "lastname"=>"Selatrop"]);
+        $userBy = $em->getRepository(User::class)->findBy(["lastname"=>"Bixde"]);
+        $userAll = $em->getRepository(User::class)->findAll();
+
+
+        return $this->render('user/busqueda.html.twig', [
+            "find" => $user,
+            "findOneBy" => $userOneBy,
+            "findBy" => $userBy,
+            "findAll" => $userAll,
+        ]);
     }
 }

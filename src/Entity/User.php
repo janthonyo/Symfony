@@ -37,6 +37,10 @@ class User
      */
     private $email;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="users", cascade={"persist"})
+     */
+    private $category;
 
     public function __construct($name, $lastname, $age, $email)
     {
@@ -95,6 +99,18 @@ class User
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
