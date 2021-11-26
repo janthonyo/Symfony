@@ -22,17 +22,19 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/success/", name="success")
+     * @Route("/user/success/", name="success")
      */
     public function ingresarDatos(){
 
         $entityManager = $this->getDoctrine()->getManager();
 
-        $user = new User();
-        $user->setName("Francisco");
-        $user->setLastname("Botella Botijo");
-        $user->setAge(22);
-        $user->setEmail("inventado@esto-sigue.com");
+        $user = new User("Hugo", "Selatrop", 13, "wakfu@outlook.es");
+
+        # $user = new User();
+        # $user->setName("Francisco");
+        # $user->setLastname("Botella Botijo");
+        # $user->setAge(22);
+        # $user->setEmail("inventado@esto-sigue.com");
 
         ## REVISAR ##
         $entityManager->persist($user);
